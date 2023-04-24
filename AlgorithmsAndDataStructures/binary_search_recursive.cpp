@@ -34,7 +34,7 @@ int main(){
 	int item = 0;
 	std::cin >> item;
 	int result = binary_search(arr, 0, size - 1, item);
-    (result == -1) ? std::cout << "Element is not present in array" << std::endl : std::cout << "Element is present at index " 
-    	<< result << std::endl;
+    	(result == -1) ? std::cout << "Element is not present in array" << std::endl : std::cout << "Element is present at index " 
+    		<< result << std::endl;
     delete[] arr;
 }
