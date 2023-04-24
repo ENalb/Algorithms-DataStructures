@@ -56,5 +56,5 @@ int main(){
 	std::cout << "Input k: ";
 	std::cin >> k;
 	std::cout << k << "-th smallest element of array: " << k_th_smallest(arr, 0, size - 1, k) << std::endl;
-    delete[] arr;
+    	delete[] arr;
 }
