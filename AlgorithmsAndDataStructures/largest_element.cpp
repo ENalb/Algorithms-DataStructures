@@ -28,5 +28,5 @@ int main(){
 	int* arr = new int[size];
 	initialize_array(arr, size);
 	std::cout << "Max element of array: " << largest_value_of_array(arr, size) << std::endl;
-    delete[] arr;
+    	delete[] arr;
 }
