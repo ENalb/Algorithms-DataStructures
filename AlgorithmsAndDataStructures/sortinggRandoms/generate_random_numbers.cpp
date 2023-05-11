@@ -5,7 +5,7 @@
 void generate();
 
 int main(){
-	generate();
+    generate();
     return 0;
 }
 
