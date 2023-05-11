@@ -45,7 +45,7 @@ void mergeSort(std::vector<int>& arr, int start, int end) {
 }
 
 int main(){
-	std::ifstream infile("randomNumbers.txt");
+    std::ifstream infile("randomNumbers.txt");
     if (!infile) {
         std::cerr << "Error: could not open file\n";
         return 1;
