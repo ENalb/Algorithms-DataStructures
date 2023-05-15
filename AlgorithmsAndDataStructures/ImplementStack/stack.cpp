@@ -2,8 +2,8 @@
 
 void Stack::push(int x){
 	++top_index;
-    arr.resize(top_index + 1);
-    arr[top_index] = x;
+    	arr.resize(top_index + 1);
+    	arr[top_index] = x;
 }
 
 void Stack::pop(){
