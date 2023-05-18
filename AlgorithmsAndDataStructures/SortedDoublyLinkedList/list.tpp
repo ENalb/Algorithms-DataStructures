@@ -20,25 +20,25 @@ void List<T>::sortedInsert(const T& value) {
 		return;
 	}
 	Node* prev = nullptr;
-    Node* current = head;
-    while (current && current->val < newNode->val) {
-        prev = current;
-        current = current->next;
-    }
-    if (prev == nullptr) {
-        newNode->next = head;
-        head->prevSmaller = newNode;
-        head = newNode;
-    }
-    else {
-        newNode->next = current;
-        prev->next = newNode;
-        newNode->prevSmaller = prev;
-        if (current)
-            current->prevSmaller = newNode;
-        else
-            tail = newNode;
-    }
+    	Node* current = head;
+    	while (current && current->val < newNode->val) {
+        	prev = current;
+        	current = current->next;
+    	}
+    	if (prev == nullptr) {
+        	newNode->next = head;
+        	head->prevSmaller = newNode;
+        	head = newNode;
+    	}
+    	else {
+        	newNode->next = current;
+        	prev->next = newNode;
+        	newNode->prevSmaller = prev;
+        	if (current)
+            		current->prevSmaller = newNode;
+        	else
+            		tail = newNode;
+    	}
 }
 
 template <typename T>
@@ -53,15 +53,15 @@ void List<T>::remove(const T& value){
 		return;
 	}
 	Node* curr = head;
-    while(curr->next != nullptr && curr->next->val != value) {
-        curr = curr->next;
-    }
-    if(curr->next == nullptr) {
-        return;
-    }
-    Node* temp = curr->next;
-    curr->next = temp->next;
-    delete temp;
+    	while(curr->next != nullptr && curr->next->val != value) {
+        	curr = curr->next;
+    	}
+    	if(curr->next == nullptr) {
+        	return;
+    	}
+    	Node* temp = curr->next;
+    	curr->next = temp->next;
+    	delete temp;
 }
 
 template <typename T>
@@ -76,8 +76,8 @@ void List<T>::push_back(const T& value){
 		head = newNode;
 	}
 	if (newNode->prev) {
-        newNode->prev->nextGreater = newNode;
-    }
+        	newNode->prev->nextGreater = newNode;
+    	}
 	tail = newNode;
 }
 
@@ -92,8 +92,8 @@ void List<T>::push_front(const T& value){
 		tail = newNode;
 	}
 	if (newNode->next) {
-        newNode->next->prevSmaller = newNode;
-    }
+        	newNode->next->prevSmaller = newNode;
+    	}
 	head = newNode;
 }
 
@@ -111,8 +111,8 @@ void List<T>::pop_back(){
 		head = nullptr;
 	}
 	if (tmp->prevSmaller != nullptr) {
-        tmp->prevSmaller->nextGreater = nullptr;
-    }
+        	tmp->prevSmaller->nextGreater = nullptr;
+    	}
 	delete tmp;
 }
 
@@ -130,8 +130,8 @@ void List<T>::pop_front(){
 		tail = nullptr;
 	}
 	if (tmp->nextGreater != nullptr) {
-        tmp->nextGreater->prevSmaller = nullptr;
-    }
+        	tmp->nextGreater->prevSmaller = nullptr;
+    	}
 	delete tmp;
 }
 
@@ -240,10 +240,10 @@ void List<T>::serialization(const std::string& filename){
 	std::ofstream file(filename);
 	if(file.is_open()){
 		typename List<T>::Node* current = head;
-        while (current != nullptr) {
-            file << current->val << std::endl;
-            current = current->next;
-        }
+        	while (current != nullptr) {
+            		file << current->val << std::endl;
+            		current = current->next;
+        	}
 		file.close();
 		std::cout << "Serialization in " << filename << " is done." << std::endl;
 	}
