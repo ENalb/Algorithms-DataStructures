@@ -31,7 +31,7 @@ void Stack<T>::pop(){
 template <typename T>
 T Stack<T>::peek(){
 	if(empty()){
-		throw std::out_of_range{"Stack is full"};
+		throw std::out_of_range{"Stack is empty"};
 	}
 	return items.back();
 }
