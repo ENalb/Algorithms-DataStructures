@@ -120,7 +120,7 @@ void parseFilesAndStoreResults(const std::vector<std::string>& dictionary) {
         for (const std::string& file : entry.second) {
             outputFile << file << ",";
         }
-        outputFile.seekp(-1, std::ios_base::end); // Remove the trailing comma
+        outputFile.seekp(-1, std::ios_base::end); 
         outputFile << std::endl;
     }
     outputFile.close();
