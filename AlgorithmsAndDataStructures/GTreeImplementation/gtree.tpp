@@ -67,24 +67,45 @@ void GTree<T>::insertHelper(GTreeNode* node, GTreeNode* newNode, int level, int 
 }
 
 template <typename T>
-void GTree<T>::remove(int level, int order){
-	if(root == nullptr){
-		std::cout << "Tree empty" << std::endl;
-		return;
-	}
-	else{
-		if(level >= 0 && level < root->children.size()){
-			if(order >= 0 && order < root->children[level].children.size()){
-				root->children[level]->children.erase(order);
-			}
-			else{
-				std::cout << "Invalid order value" << std::endl;
-			}
-		}
-		else{
-			std::cout << "Invalid level value" << std::endl;
-		}
-	}
+void GTree<T>::remove(int level, int order) {
+	if (root == nullptr) {
+        	std::cout << "Tree is empty" << std::endl;
+        	return;
+    	}
+    	if (level < 0 || level > root->children.size()) {
+        	std::cout << "Invalid level value" << std::endl;
+        	return;
+    	}
+    	if (level == 0) {
+        	if (order != 0) {
+            		std::cout << "Invalid order value" << std::endl;
+            		return;
+        	}
+        	delete root;
+        	root = nullptr;
+    	} 
+	else {
+        	removeHelper(root, level, order);
+    	}
+}
+
+template <typename T>
+void GTree<T>::removeHelper(typename GTree<T>::GTreeNode* node, int level, int order) {
+    	if (level == 1) {
+        	if (order < 0 || order >= node->children.size()) {
+            		std::cout << "Invalid order value" << std::endl;
+            		return;
+        	}
+        	delete node->children[order];
+        	node->children.erase(order);
+    	} 
+	else {
+        	if (order < 0 || order >= node->children.size()) {
+            		std::cout << "Invalid order value" << std::endl;
+            		return;
+        	}
+        	removeHelper(node->children[order], level - 1, order);
+    	}
 }
 
 template <typename T>
