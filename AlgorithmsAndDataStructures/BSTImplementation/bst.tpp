@@ -335,6 +335,62 @@ T BinarySearchTree<T>::getPredecessor(const T& anEntry) const{
     	return predecessorNode->value;
 }
 
+template <typename T>
+void BinarySearchTree<T>::removeSuccessor(typename BinarySearchTree<T>::BinaryNode* node) {
+    	BinaryNode* parent = node;
+    	BinaryNode* successor = node->right;
+    	while (successor->left) {
+        	parent = successor;
+        	successor = successor->left;
+    	}
+    	node->value = successor->value;
+    	if (parent == node)
+        	parent->right = successor->right;
+    	else
+        	parent->left = successor->right;
+    	delete successor;
+}
+
+template <typename T>
+bool BinarySearchTree<T>::removeIterative(const T& target) {
+    	BinaryNode* parent = nullptr;
+    	BinaryNode* current = root;
+    	while (current && current->value != target) {
+        	parent = current;
+        	if (target < current->value)
+            		current = current->left;
+        	else
+            		current = current->right;
+    	}
+    	if (!current)
+        	return false;
+    	if (!current->left && !current->right) {
+        	if (current == root)
+            		root = nullptr;
+        	else if (current == parent->left)
+            		parent->left = nullptr;
+        	else
+            		parent->right = nullptr;
+        	delete current;
+    	}
+    	else if (!current->left || !current->right) {
+        	BinaryNode* child = current->left ? current->left : current->right;
+        	if (current == root)
+            		root = child;
+        	else if (current == parent->left)
+            		parent->left = child;
+        	else
+            		parent->right = child;
+        	delete current;
+    	}
+    	else {
+        	BinaryNode* successor = findMinNode(current->right);
+        	current->value = successor->value;
+        	removeSuccessor(successor);
+    	}
+    	return true;
+}
+
 template <typename T> 
 typename BinarySearchTree<T>::BinaryNode* BinarySearchTree<T>::removeLeftmostNode(typename BinarySearchTree<T>::BinaryNode* subTreePtr, T& inorderSuccessor){
 	if(!subTreePtr->left){
