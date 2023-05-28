@@ -24,6 +24,7 @@ public:
 	void inorderTraverse(void visit(T&)) const;
 	void postorderTraverse(void visit(T&)) const;
 	typename BinarySearchTree<T>::BinaryNode* remove(const T& anEntry);
+	bool removeIterative(const T& target);
 	void clear();
 	T getSuccessor(const T& anEntry) const;
     	T getPredecessor(const T& anEntry) const;
@@ -42,6 +43,7 @@ protected:
 	void inorder(void visit(T&), typename BinarySearchTree<T>::BinaryNode* treePtr) const;
 	void preorder(void visit(T&), typename BinarySearchTree<T>::BinaryNode* treePtr) const;
 	void postorder(void visit(T&), typename BinarySearchTree<T>::BinaryNode* treePtr) const;
+	void removeSuccessor(typename BinarySearchTree<T>::BinaryNode* node);
 	typename BinarySearchTree<T>::BinaryNode* removeValue(typename BinarySearchTree<T>::BinaryNode* subTreePtr, const T target, bool& success);
 	typename BinarySearchTree<T>::BinaryNode* removeNode(typename BinarySearchTree<T>::BinaryNode* nodePtr); 
 	typename BinarySearchTree<T>::BinaryNode* removeLeftmostNode(typename BinarySearchTree<T>::BinaryNode* subTreePtr, T& inorderSuccessor); 
