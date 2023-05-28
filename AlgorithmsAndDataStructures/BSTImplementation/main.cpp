@@ -27,6 +27,7 @@ int main(){
 	std::cout << "Predecessor of 6 " << bst.getPredecessor(6) << std::endl; 
 	bst.printPreorder();
 	std::cout << std::endl;
+	bst.removeIterative(105);
 	bst.printPostorder();
 	std::cout << std::endl;
 
