@@ -29,11 +29,11 @@ public:
 	bool removeIterative(const T& target);
 	void clear();
 	T getSuccessor(const T& anEntry) const;
-    T getPredecessor(const T& anEntry) const;
-    void printInorder() const;
-    void printPreorder() const;
-    void printPostorder() const;
-    typename BinarySearchTree<T>::BinaryNode* getRoot() const;
+    	T getPredecessor(const T& anEntry) const;
+    	void printInorder() const;
+    	void printPreorder() const;
+    	void printPostorder() const;
+    	typename BinarySearchTree<T>::BinaryNode* getRoot() const;
 	void serialize(const std::string& filename);
 	void deserialize(const std::string& filename);
 protected:
@@ -42,7 +42,7 @@ protected:
 	typename BinarySearchTree<T>::BinaryNode* findNode(typename BinarySearchTree<T>::BinaryNode* treePtr, const T& target) const;
 	typename BinarySearchTree<T>::BinaryNode* findNodeIterative(typename BinarySearchTree<T>::BinaryNode* treePtr, const T& target) const;
 	typename BinarySearchTree<T>::BinaryNode* findMinNode(typename BinarySearchTree<T>::BinaryNode* treePtr) const;
-    typename BinarySearchTree<T>::BinaryNode* findMaxNode(typename BinarySearchTree<T>::BinaryNode* treePtr) const;
+    	typename BinarySearchTree<T>::BinaryNode* findMaxNode(typename BinarySearchTree<T>::BinaryNode* treePtr) const;
 	typename BinarySearchTree<T>::BinaryNode* insertInorder(typename BinarySearchTree<T>::BinaryNode* subTreePtr, typename BinarySearchTree<T>::BinaryNode* newNode);
 	void insertInorderIterative(const T& value);
 	void inorder(void visit(T&), typename BinarySearchTree<T>::BinaryNode* treePtr) const;
@@ -53,11 +53,11 @@ protected:
 	typename BinarySearchTree<T>::BinaryNode* removeNode(typename BinarySearchTree<T>::BinaryNode* nodePtr); 
 	typename BinarySearchTree<T>::BinaryNode* removeLeftmostNode(typename BinarySearchTree<T>::BinaryNode* subTreePtr, T& inorderSuccessor); 
 	void clearHelper(typename BinarySearchTree<T>::BinaryNode* node);
-    typename BinarySearchTree<T>::BinaryNode* findSuccessorNode(typename BinarySearchTree<T>::BinaryNode* treePtr, const T& target) const;
-    typename BinarySearchTree<T>::BinaryNode* findPredecessorNode(typename BinarySearchTree<T>::BinaryNode* treePtr, const T& target) const;
-    void printInorderHelper(typename BinarySearchTree<T>::BinaryNode* treePtr) const;
-    void printPreorder(typename BinarySearchTree<T>::BinaryNode* node) const;
-    void printPostorder(typename BinarySearchTree<T>::BinaryNode* node) const;
+    	typename BinarySearchTree<T>::BinaryNode* findSuccessorNode(typename BinarySearchTree<T>::BinaryNode* treePtr, const T& target) const;
+    	typename BinarySearchTree<T>::BinaryNode* findPredecessorNode(typename BinarySearchTree<T>::BinaryNode* treePtr, const T& target) const;
+    	void printInorderHelper(typename BinarySearchTree<T>::BinaryNode* treePtr) const;
+    	void printPreorder(typename BinarySearchTree<T>::BinaryNode* node) const;
+    	void printPostorder(typename BinarySearchTree<T>::BinaryNode* node) const;
 	void serializeHelper(typename BinarySearchTree<T>::BinaryNode* node, std::ofstream& file);
 	typename BinarySearchTree<T>::BinaryNode* deserializeHelper(std::ifstream& file);
 private:
