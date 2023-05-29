@@ -30,11 +30,11 @@ bool BinarySearchTree<T>::isEmpty() const{
 template <typename T>
 int BinarySearchTree<T>::getHeightHelper(const typename BinarySearchTree<T>::BinaryNode* root) const{
 	if (!root) {
-        return 0;
-    }
-    int leftHeight = getHeightHelper(root->left);
-    int rightHeight = getHeightHelper(root->right);
-    return std::max(leftHeight, rightHeight) + 1;
+        	return 0;
+    	}
+    	int leftHeight = getHeightHelper(root->left);
+    	int rightHeight = getHeightHelper(root->right);
+    	return std::max(leftHeight, rightHeight) + 1;
 }
 
 template <typename T>
@@ -89,37 +89,39 @@ template <typename T>
 void BinarySearchTree<T>::add(const T& newEntry){
 	typename BinarySearchTree<T>::BinaryNode* newNode = new BinaryNode(newEntry);
 	newNode->left = nullptr;
-    newNode->right = nullptr;
+    	newNode->right = nullptr;
 	root = insertInorder(root, newNode);
 }
 
 template <typename T>
 void BinarySearchTree<T>::insertInorderIterative(const T& value) {
-    typename BinarySearchTree<T>::BinaryNode* newNode = new BinaryNode(value);
-    if (!root) {
-        root = newNode;
-        return;
-    }
-    BinaryNode* current = root;
-    BinaryNode* prev = nullptr;
-    while (current) {
-        prev = current;
-        if (value <= current->value) {
-            current = current->left;
-        } else {
-            current = current->right;
-        }
-    }
-    if (value <= prev->value) {
-        prev->left = newNode;
-    } else {
-        prev->right = newNode;
-    }
+    	typename BinarySearchTree<T>::BinaryNode* newNode = new BinaryNode(value);
+    	if (!root) {
+        	root = newNode;
+        	return;
+    	}
+    	BinaryNode* current = root;
+    	BinaryNode* prev = nullptr;
+    	while (current) {
+        	prev = current;
+        	if (value <= current->value) {
+            		current = current->left;
+        	} 
+		else {
+            		current = current->right;
+        	}
+    	}
+    	if (value <= prev->value) {
+        	prev->left = newNode;
+    	} 
+	else {
+        	prev->right = newNode;
+    	}
 }
 
 template <typename T>
 void BinarySearchTree<T>::addIterative(const T& value) {
-    insertInorderIterative(value);
+    	insertInorderIterative(value);
 }
 
 template <typename T>
@@ -134,15 +136,15 @@ T BinarySearchTree<T>::getEntry(const T& anEntry) const{
 template <typename T>
 typename BinarySearchTree<T>::BinaryNode* BinarySearchTree<T>::findNode(typename BinarySearchTree<T>::BinaryNode* treePtr, const T& target) const{
 	if (treePtr == nullptr) {
-        return nullptr;
-    }
-    if (treePtr->value == target) {
-        return treePtr;
-    } 
-    else if (treePtr->value > target) {
-        return findNode(treePtr->left, target);
-    } 
-    return findNode(treePtr->right, target);
+        	return nullptr;
+    	}
+    	if (treePtr->value == target) {
+        	return treePtr;
+    	} 
+    	else if (treePtr->value > target) {
+        	return findNode(treePtr->left, target);
+    	} 
+    	return findNode(treePtr->right, target);
 }
 
 template <typename T>
@@ -283,11 +285,12 @@ typename BinarySearchTree<T>::BinaryNode* BinarySearchTree<T>::findSuccessorNode
 		typename BinarySearchTree<T>::BinaryNode* current = treePtr;
 		while(current != found){
 			if (found->value < current->value) {
-                successor = current;
-                current = current->left;
-            } else {
-                current = current->right;
-            }
+                		successor = current;
+                		current = current->left;
+            		} 
+			else {
+                		current = current->right;
+            		}
 		}
 		return successor;
 	}
@@ -311,87 +314,88 @@ typename BinarySearchTree<T>::BinaryNode* BinarySearchTree<T>::findPredecessorNo
 	}
 	if(found->left){
 		typename BinarySearchTree<T>::BinaryNode* predecessor = found->left;
-        while (predecessor->right) {
-            predecessor = predecessor->right;
-        }
-        return predecessor;
+        	while (predecessor->right) {
+            		predecessor = predecessor->right;
+        	}
+        	return predecessor;
 	}
 	typename BinarySearchTree<T>::BinaryNode* predecessor = nullptr;
-    typename BinarySearchTree<T>::BinaryNode* current = treePtr;
-    while (current != found) {
-        if (found->value > current->value) {
-            predecessor = current;
-            current = current->right;
-        } else {
-            current = current->left;
-        }
-    }
-    return predecessor;
+    	typename BinarySearchTree<T>::BinaryNode* current = treePtr;
+    	while (current != found) {
+        	if (found->value > current->value) {
+            		predecessor = current;
+            		current = current->right;
+        	} 
+		else {
+            		current = current->left;
+        	}
+    	}
+    	return predecessor;
 }
 
 template <typename T>
 T BinarySearchTree<T>::getPredecessor(const T& anEntry) const{
 	BinaryNode* predecessorNode = findPredecessorNode(root, anEntry);
-    if (!predecessorNode) {
-    	std::cout << "Predecessor not found" << std::endl;
-    }
-    return predecessorNode->value;
+    	if (!predecessorNode) {
+    		std::cout << "Predecessor not found" << std::endl;
+    	}
+    	return predecessorNode->value;
 }
 
 template <typename T>
 void BinarySearchTree<T>::removeSuccessor(typename BinarySearchTree<T>::BinaryNode* node) {
-    BinaryNode* parent = node;
-    BinaryNode* successor = node->right;
-    while (successor->left) {
-        parent = successor;
-        successor = successor->left;
-    }
-    node->value = successor->value;
-    if (parent == node)
-        parent->right = successor->right;
-    else
-        parent->left = successor->right;
-    delete successor;
+    	BinaryNode* parent = node;
+    	BinaryNode* successor = node->right;
+    	while (successor->left) {
+        	parent = successor;
+        	successor = successor->left;
+    	}
+    	node->value = successor->value;
+    	if (parent == node)
+        	parent->right = successor->right;
+    	else
+        	parent->left = successor->right;
+    	delete successor;
 }
 
 template <typename T>
 bool BinarySearchTree<T>::removeIterative(const T& target) {
-    BinaryNode* parent = nullptr;
-    BinaryNode* current = root;
-    while (current && current->value != target) {
-        parent = current;
-        if (target < current->value)
-            current = current->left;
-        else
-            current = current->right;
-    }
-    if (!current)
-        return false;
-    if (!current->left && !current->right) {
-        if (current == root)
-            root = nullptr;
-        else if (current == parent->left)
-            parent->left = nullptr;
-        else
-            parent->right = nullptr;
-        delete current;
-    }
-    else if (!current->left || !current->right) {
-        BinaryNode* child = current->left ? current->left : current->right;
-        if (current == root)
-            root = child;
-        else if (current == parent->left)
-            parent->left = child;
-        else
-            parent->right = child;
-        delete current;
-    }
-    else {
-        BinaryNode* successor = findMinNode(current->right);
-        current->value = successor->value;
-        removeSuccessor(successor);
-    }
-    return true;
+    	BinaryNode* parent = nullptr;
+    	BinaryNode* current = root;
+    	while (current && current->value != target) {
+        	parent = current;
+        	if (target < current->value)
+            		current = current->left;
+        	else
+            		current = current->right;
+    	}
+    	if (!current)
+        	return false;
+    	if (!current->left && !current->right) {
+        	if (current == root)
+            		root = nullptr;
+        	else if (current == parent->left)
+            		parent->left = nullptr;
+        	else
+            		parent->right = nullptr;
+        	delete current;
+    	}
+    	else if (!current->left || !current->right) {
+        	BinaryNode* child = current->left ? current->left : current->right;
+        	if (current == root)
+            		root = child;
+        	else if (current == parent->left)
+            		parent->left = child;
+        	else
+            		parent->right = child;
+        	delete current;
+    	}
+    	else {
+        	BinaryNode* successor = findMinNode(current->right);
+        	current->value = successor->value;
+        	removeSuccessor(successor);
+    	}
+    	return true;
 }
 
 template <typename T> 
@@ -406,52 +410,52 @@ typename BinarySearchTree<T>::BinaryNode* BinarySearchTree<T>::removeLeftmostNod
 template <typename T>
 typename BinarySearchTree<T>::BinaryNode* BinarySearchTree<T>::removeNode(typename BinarySearchTree<T>::BinaryNode* node){
 	if (!node->left && !node->right) {
-        delete node;
-        return nullptr;
-    }
-    else if (!node->left) {
-        typename BinarySearchTree<T>::BinaryNode* temp = node->right;
-        delete node;
-        return temp;
-    }
-    else if (!node->right) {
-        typename BinarySearchTree<T>::BinaryNode* temp = node->left;
-        delete node;
-        return temp;
-    }
-    else {
-        int inorderSuccessor;
-        typename BinarySearchTree<T>::BinaryNode* tempPtr = removeLeftmostNode(node->right, inorderSuccessor);
-        node->right = tempPtr;
-        node->value = inorderSuccessor;
-        return node;
-    }
+        	delete node;
+        	return nullptr;
+    	}
+    	else if (!node->left) {
+        	typename BinarySearchTree<T>::BinaryNode* temp = node->right;
+        	delete node;
+        	return temp;
+    	}
+    	else if (!node->right) {
+        	typename BinarySearchTree<T>::BinaryNode* temp = node->left;
+        	delete node;
+        	return temp;
+    	}
+    	else {
+        	int inorderSuccessor;
+        	typename BinarySearchTree<T>::BinaryNode* tempPtr = removeLeftmostNode(node->right, inorderSuccessor);
+        	node->right = tempPtr;
+        	node->value = inorderSuccessor;
+        	return node;
+    	}
 }
 
 template <typename T>
 typename BinarySearchTree<T>::BinaryNode* BinarySearchTree<T>::removeValue(typename BinarySearchTree<T>::BinaryNode* subTree, const T target, bool& success){
 	if (!subTree) {
-        success = false;
-        return nullptr;
-    }
-    if (subTree->value == target) {
-        success = true;
-        return removeNode(subTree);
-    }
-    if (subTree->value > target) {
-        subTree->left = removeValue(subTree->left, target, success);
-    }
-    else {
-        subTree->right = removeValue(subTree->right, target, success);
-    }
-    return subTree;
+        	success = false;
+        	return nullptr;
+    	}
+    	if (subTree->value == target) {
+        	success = true;
+        	return removeNode(subTree);
+    	}
+    	if (subTree->value > target) {
+        	subTree->left = removeValue(subTree->left, target, success);
+    	}
+    	else {
+        	subTree->right = removeValue(subTree->right, target, success);
+    	}
+    	return subTree;
 }
 
 template <typename T>
 typename BinarySearchTree<T>::BinaryNode* BinarySearchTree<T>::remove(const T& anEntry){
 	bool success = false;
-    typename BinarySearchTree<T>::BinaryNode* newRoot = removeValue(root, anEntry, success);
-    return newRoot;
+    	typename BinarySearchTree<T>::BinaryNode* newRoot = removeValue(root, anEntry, success);
+    	return newRoot;
 }
 
 template <typename T>
@@ -471,45 +475,45 @@ void BinarySearchTree<T>::clear(){
 
 template <typename T>
 void BinarySearchTree<T>::printInorderHelper(typename BinarySearchTree<T>::BinaryNode* node) const {
-    if (node) {
-        printInorderHelper(node->left);
-        std::cout << node->value << " ";
-        printInorderHelper(node->right);
-    }
+    	if (node) {
+        	printInorderHelper(node->left);
+        	std::cout << node->value << " ";
+        	printInorderHelper(node->right);
+    	}
 }
 
 template <typename T>
 void BinarySearchTree<T>::printInorder() const {
-    printInorderHelper(root);
-    std::cout << std::endl;
+    	printInorderHelper(root);
+    	std::cout << std::endl;
 }
 
 template <typename T>
 void BinarySearchTree<T>::printPreorder() const {
-    printPreorder(root);
+    	printPreorder(root);
 }
 
 template <typename T>
 void BinarySearchTree<T>::printPreorder(typename BinarySearchTree<T>::BinaryNode* node) const {
-    if (node) {
-        std::cout << node->value << " ";
-        printPreorder(node->left);
-        printPreorder(node->right);
-    }
+    	if (node) {
+        	std::cout << node->value << " ";
+        	printPreorder(node->left);
+        	printPreorder(node->right);
+    	}
 }
 
 template <typename T>
 void BinarySearchTree<T>::printPostorder() const {
-    printPostorder(root);
+    	printPostorder(root);
 }
 
 template <typename T>
 void BinarySearchTree<T>::printPostorder(typename BinarySearchTree<T>::BinaryNode* node) const {
-    if (node) {
-        printPostorder(node->left);
-        printPostorder(node->right);
-        std::cout << node->value << " ";
-    }
+    	if (node) {
+        	printPostorder(node->left);
+        	printPostorder(node->right);
+        	std::cout << node->value << " ";
+    	}
 }
 
 template <typename T>
@@ -535,27 +539,27 @@ void BinarySearchTree<T>::serialize(const std::string& filename) {
 
 template <typename T>
 typename BinarySearchTree<T>::BinaryNode* BinarySearchTree<T>::deserializeHelper(std::ifstream& file) {
-    T value;
-    if (file >> value) {
-        BinaryNode* newNode = new BinaryNode(value);
-        newNode->left = deserializeHelper(file);
-        newNode->right = deserializeHelper(file);
-        return newNode;
-    }
-    return nullptr;
+    	T value;
+    	if (file >> value) {
+        	BinaryNode* newNode = new BinaryNode(value);
+        	newNode->left = deserializeHelper(file);
+        	newNode->right = deserializeHelper(file);
+        	return newNode;
+    	}
+    	return nullptr;
 }
 
 template <typename T>
 void BinarySearchTree<T>::deserialize(const std::string& filename) {
-    std::ifstream file(filename);
-    if (!file.is_open()) {
-        std::cout << "Can't open file." << std::endl;
-        return;
-    }
+    	std::ifstream file(filename);
+    	if (!file.is_open()) {
+        	std::cout << "Can't open file." << std::endl;
+        	return;
+    	}
 
-    clear(); 
+    	clear(); 
 
-    root = deserializeHelper(file); 
+    	root = deserializeHelper(file); 
 
-    file.close();
+    	file.close();
 }
