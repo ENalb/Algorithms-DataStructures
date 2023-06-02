@@ -88,24 +88,24 @@ T& List<T>::back(){
 template <typename T>
 void List<T>::remove(const T& value){
 	if(head == nullptr) {
-        return;
-    }
-    if(head->val == value) {
-        Node* temp = head;
-        head = head->next;
-        delete temp;
-        return;
-    }
-    Node* curr = head;
-    while(curr->next != nullptr && curr->next->val != value) {
-        curr = curr->next;
-    }
-    if(curr->next == nullptr) {
-        return;
-    }
-    Node* temp = curr->next;
-    curr->next = temp->next;
-    delete temp;
+        	return;
+    	}
+    	if(head->val == value) {
+        	Node* temp = head;
+        	head = head->next;
+        	delete temp;
+        	return;
+    	}
+    	Node* curr = head;
+    	while(curr->next != nullptr && curr->next->val != value) {
+        	curr = curr->next;
+    	}
+    	if(curr->next == nullptr) {
+        	return;
+    	}
+    	Node* temp = curr->next;
+    	curr->next = temp->next;
+    	delete temp;
 }
 
 template <typename T>
@@ -131,188 +131,188 @@ void List<T>::erase(int pos){
 		pop_front();
 	}
 	Node* current = head;
-    Node* previous = nullptr;
-    int count = 0;
+    	Node* previous = nullptr;
+    	int count = 0;
     
-    while (count < pos) {
-        previous = current;
-        current = current->next;
-        count++;
-    }
+    	while (count < pos) {
+        	previous = current;
+        	current = current->next;
+        	count++;
+    	}
     
-    previous->next = current->next;
+    	previous->next = current->next;
     
-    if (current == tail) {
-        tail = previous;
-    } else {
-        current->next->prev = previous;
-    }
+    	if (current == tail) {
+        	tail = previous;
+    	} else {
+        	current->next->prev = previous;
+    	}
     
-    delete current;
+    	delete current;
 }
 
 template <typename T>
 void List<T>::insert(int pos, const T& val){
 	if (pos < 0 || pos > size()) {
-        throw std::out_of_range{"Invalid position"};
-    }
+        	throw std::out_of_range{"Invalid position"};
+    	}
     
-    if (pos == 0) {
-        push_front(val);  
-        return;
-    }
+    	if (pos == 0) {
+        	push_front(val);  
+        	return;
+    	}
     
-    Node* current = head;
-    Node* previous = nullptr;
-    int count = 0;
+    	Node* current = head;
+    	Node* previous = nullptr;
+    	int count = 0;
     
-    while (count < pos) {
-        previous = current;
-        current = current->next;
-        count++;
-    }
+    	while (count < pos) {
+        	previous = current;
+        	current = current->next;
+        	count++;
+    	}
     
-    Node* new_node = new Node(val);
-    new_node->next = current;
-    new_node->prev = previous;
+    	Node* new_node = new Node(val);
+    	new_node->next = current;
+    	new_node->prev = previous;
     
-    previous->next = new_node;
+    	previous->next = new_node;
     
-    if (current != nullptr) {
-        current->prev = new_node;
-    } else {
-        tail = new_node;  
-    }
+    	if (current != nullptr) {
+        	current->prev = new_node;
+    	} else {
+        	tail = new_node;  
+    	}
 }
 
 template <typename T>
 int List<T>::find(const T& val){
 	Node* current = head;
-    int index = 0;
-    while (current != nullptr) {
-        if (current->val == val) {
-            return index;
-        }
-        current = current->next;
-        index++;
-    }
-    return -1;
+    	int index = 0;
+    	while (current != nullptr) {
+        	if (current->val == val) {
+           		return index;
+        	}
+        	current = current->next;
+        	index++;
+    	}
+    	return -1;
 }
 
 template <typename T>
 void List<T>::printList(const List<T>& myList) {
-    typename List<T>::Node* current = myList.head;
+    	typename List<T>::Node* current = myList.head;
 
-    while (current != nullptr) {
-        std::cout << current->val << " ";
-        current = current->next;
-    }
+    	while (current != nullptr) {
+        	std::cout << current->val << " ";
+        	current = current->next;
+    	}
 
-    std::cout << std::endl;
+    	std::cout << std::endl;
 }
 
 template <typename T>
 T& List<T>::operator[](int index) {
-    Node* currentNode = head;
-    size_t currentIndex = 0;
+    	Node* currentNode = head;
+    	size_t currentIndex = 0;
     
-    while (currentNode != nullptr) {
-        if (currentIndex == index) {
-            return currentNode->data;
-        }
+    	while (currentNode != nullptr) {
+        	if (currentIndex == index) {
+            		return currentNode->data;
+        	}
         
-        currentNode = currentNode->next;
-        currentIndex++;
-    }
+        	currentNode = currentNode->next;
+        	currentIndex++;
+    	}
     
-    throw std::out_of_range("Index out of bounds");
+    	throw std::out_of_range("Index out of bounds");
 }
 
 template <typename T>
 const T& List<T>::operator[](int index) const{
-    Node* currentNode = head;
-    size_t currentIndex = 0;
+    	Node* currentNode = head;
+    	size_t currentIndex = 0;
     
-    while (currentNode != nullptr) {
-        if (currentIndex == index) {
-            return currentNode->val;
-        }
+    	while (currentNode != nullptr) {
+        	if (currentIndex == index) {
+            		return currentNode->val;
+        	}
         
-        currentNode = currentNode->next;
-        currentIndex++;
-    }
+        	currentNode = currentNode->next;
+        	currentIndex++;
+    	}
     
-    throw std::out_of_range("Index out of bounds");
+    	throw std::out_of_range("Index out of bounds");
 }
 
 template <typename T>
 T& List<T>::at(int index) {
-    if (index < 0 || index >= size()) {
-        throw std::out_of_range("Index out of bounds");
-    }
+    	if (index < 0 || index >= size()) {
+        	throw std::out_of_range("Index out of bounds");
+    	}
     
-    Node* current = head;
-    int count = 0;
+    	Node* current = head;
+    	int count = 0;
     
-    while (current != nullptr && count < index) {
-        current = current->next;
-        count++;
-    }
+    	while (current != nullptr && count < index) {
+        	current = current->next;
+        	count++;
+    	}
     
-    return current->val;
+    	return current->val;
 }
 
 template <typename T>
 const T& List<T>::at(int index) const {
-    if (index < 0 || index >= size()) {
-        throw std::out_of_range("Index out of bounds");
-    }
+    	if (index < 0 || index >= size()) {
+        	throw std::out_of_range("Index out of bounds");
+    	}
     
-    Node* current = head;
-    int count = 0;
+    	Node* current = head;
+    	int count = 0;
     
-    while (current != nullptr && count < index) {
-        current = current->next;
-        count++;
-    }
+    	while (current != nullptr && count < index) {
+        	current = current->next;
+        	count++;
+    	}
     
-    return current->val;
+    	return current->val;
 }
 
 
 template <typename T>
 bool List<T>::operator==(const List& other) const{
 	if (this == &other) {
-        return true;
-    }
-    if (size() != other.size()) {
-        return false;
-    }
-    for (int i = 0; i < size(); ++i) {
-        if (at(i) != other.at(i)) {
-            return false;
-        }
-    }
-    return true;
+        	return true;
+    	}
+    	if (size() != other.size()) {
+        	return false;
+    	}
+    	for (int i = 0; i < size(); ++i) {
+        	if (at(i) != other.at(i)) {
+            		return false;
+        	}
+    	}
+    	return true;
 }
 
 
 template <typename T>
 T* List<T>::begin() {
-    return &head->val;
+    	return &head->val;
 }
 
 template <typename T>
 const T* List<T>::begin() const {
-    return &head->data;
+    	return &head->val;
 }
 
 template <typename T>
 T* List<T>::end() {
-    return nullptr;
+    	return nullptr;
 }
 
 template <typename T>
 const T* List<T>::end() const {
-    return nullptr;
+    	return nullptr;
 }
