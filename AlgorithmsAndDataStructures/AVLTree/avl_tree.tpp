@@ -168,54 +168,54 @@ void AVL<T>::insert(T key){
 }
 
 template <typename T>
-AVL<T>* AVL<T>::remove(AVL* root, T key){
-	if(!root){
-		return root;
-	}
-	if(key < root->value){
-		root->left = remove(root->left, key);
-	}
-	else if(key > root->value){
-		root->right = remove(root->right, key);
-	}
-	else{
-		if(!root->left && !root->right){
-			delete root;
-			root = nullptr;
-		}
-		else if(!root->left){
-			AVL* tmp = root;
-			root = root->right;
-			delete tmp;
-		}
-		else if(!root->right){
-			AVL* tmp = root;
-			root = root->left;
-			delete tmp;
-		}
-		else{
-			AVL* tmp = findMin(root->right);
-			root->value = tmp->value;
-			root->right = remove(root->right, tmp->value);
-		}
-	}
-	updateHeight(root);
-	int balanceFactor = getBalanceFactor(root);
-	if(balanceFactor > 1 && getBalanceFactor(root->left) >= 0) {
-		return rightRotation(root);
-	}
-	else if(balanceFactor < -1 && getBalanceFactor(root->right) <= 0){
-		return leftRotation(root);
-	}
-	else if(balanceFactor > 1 && getBalanceFactor(root->left) < 0){
-		root->left = leftRotation(root->left);
-		return rightRotation(root);
-	}
-	else if(balanceFactor < -1 && getBalanceFactor(root->right) > 0){
-		root->right = rightRotation(root->right);
-		return leftRotation(root);
-	}
-	return root;
+AVL<T>* AVL<T>::remove(AVL* root, T key) {
+    	if (!root) {
+        	return root;
+    	}
+    	if (key < root->value) {
+        	root->left = remove(root->left, key);
+    	} 
+	else if (key > root->value) {
+        	root->right = remove(root->right, key);
+    	} 
+	else {
+        	if (!root->left && !root->right) {
+            		delete root;
+            		return nullptr;
+        	} 
+		else if (!root->left) {
+            		AVL* tmp = root->right;
+            		delete root;
+            		return tmp;
+        	} 
+		else if (!root->right) {
+            		AVL* tmp = root->left;
+            		delete root;
+            		return tmp;
+        	} 
+		else {
+            		AVL* tmp = findMin(root->right);
+            		root->value = tmp->value;
+            		root->right = remove(root->right, tmp->value);
+        	}
+    	}
+    	updateHeight(root);
+    	int balanceFactor = getBalanceFactor(root);
+    	if (balanceFactor > 1 && getBalanceFactor(root->left) >= 0) {
+        	return rightRotation(root);
+    	} 
+	else if (balanceFactor < -1 && getBalanceFactor(root->right) <= 0) {
+        	return leftRotation(root);
+    	} 
+	else if (balanceFactor > 1 && getBalanceFactor(root->left) < 0) {
+        	root->left = leftRotation(root->left);
+        	return rightRotation(root);
+    	} 
+	else if (balanceFactor < -1 && getBalanceFactor(root->right) > 0) {
+        	root->right = rightRotation(root->right);
+        	return leftRotation(root);
+    	}
+    	return root;
 }
 
 template <typename T>
