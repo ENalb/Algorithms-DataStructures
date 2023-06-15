@@ -13,35 +13,35 @@ PdfToTxt::PdfToTxt() = default;
 PdfToTxt::PdfToTxt(const std::string& p) : path{p} {}
 
 void PdfToTxt::readPdf() {
-    try {
-        auto document = poppler::document::load_from_file(path);
-        if (!document || document->is_locked()) {
-            std::cout << "Failed to open or process the PDF file." << std::endl;
-            return;
-        }
-        int numPages = document->pages();
-        for (int i = 0; i < numPages; ++i) {
-            auto page = document->create_page(i);
-            if (!page) {
-                std::cout << "Failed to create page " << i << std::endl;
-                continue;
-            }
-            std::string text;
-            auto textBytes = page->text();
-            for (auto byte : textBytes) {
-                text += static_cast<char>(byte);
-            }
-            std::istringstream iss(text);
-            std::string word;
-            while (iss >> word) {
-                extractedText.push_back(word);
-            }
-        }
-        std::cout << "Text extracted successfully." << std::endl;
-    } 
-    catch (std::exception& e) {
-        std::cout << "An exception occurred: " << e.what() << std::endl;
-    }
+    	try {
+        	auto document = poppler::document::load_from_file(path);
+        	if (!document || document->is_locked()) {
+            		std::cout << "Failed to open or process the PDF file." << std::endl;
+            		return;
+        	}
+        	int numPages = document->pages();
+        	for (int i = 0; i < numPages; ++i) {
+            		auto page = document->create_page(i);
+            		if (!page) {
+                		std::cout << "Failed to create page " << i << std::endl;
+                		continue;
+            		}	
+            		std::string text;
+            		auto textBytes = page->text();
+            		for (auto byte : textBytes) {
+                		text += static_cast<char>(byte);
+            		}
+            		std::istringstream iss(text);
+            		std::string word;
+            		while (iss >> word) {
+                		extractedText.push_back(word);
+            		}
+        	}
+        	std::cout << "Text extracted successfully." << std::endl;
+    	} 
+    	catch (std::exception& e) {
+        	std::cout << "An exception occurred: " << e.what() << std::endl;
+    	}
 }
 
 std::string PdfToTxt::normalizeWord(const std::string& word) {
@@ -53,8 +53,8 @@ std::string PdfToTxt::normalizeWord(const std::string& word) {
 		}
 	}
 	if (normalized.size() > 1 && normalized.back() == 's') {
-        normalized.pop_back();
-    }
+        	normalized.pop_back();
+    	}
 	return normalized;
 }
 
@@ -82,13 +82,13 @@ std::vector<std::string> PdfToTxt::dictionary(const std::string& dictionaryFile)
 
 bool PdfToTxt::checkWordInDictionary(const std::string& word, const std::string& dictionaryFile) {
 	std::vector<std::string> vec = dictionary(dictionaryFile);
-    std::string normalized = normalizeWord(word);
-    for (const std::string& dictWord : vec) {
-        if (normalizeWord(dictWord) == normalized) {
-            return true;
-        }
-    }
-    return false;
+    	std::string normalized = normalizeWord(word);
+    	for (const std::string& dictWord : vec) {
+        	if (normalizeWord(dictWord) == normalized) {
+            		return true;
+        	}
+    	}
+    	return false;
 }
 
 void PdfToTxt::writeInTxt(const std::string& fileName) {
@@ -102,9 +102,9 @@ void PdfToTxt::writeInTxt(const std::string& fileName) {
 	for (int i = 0; i < normalizedVec.size(); ++i) {
 		if (checkWordInDictionary(normalizedVec[i], "words_alpha.txt")) {
 			if (std::find(uniqueWords.begin(), uniqueWords.end(), normalizedVec[i]) == uniqueWords.end()) {
-                file << normalizedVec[i] << std::endl;
-                uniqueWords.push_back(normalizedVec[i]);
-            }
+                		file << normalizedVec[i] << std::endl;
+                		uniqueWords.push_back(normalizedVec[i]);
+            		}
 		}
 	}
 	file.close();
